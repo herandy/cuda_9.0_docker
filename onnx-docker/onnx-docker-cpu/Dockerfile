@@ -1,4 +1,4 @@
-<html><head></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;"># Using this script to build your ONNX image.
+# Using this script to build your ONNX image.
 # Execute "docker build dir", where dir contains this Dockerfile. Make sure you give docker container at least 8GB memory.
 # Execute "docker run -i -t image_id", where image_id is the id of the image you just generated.
 # Try "python tutorial-without-mobile-part.py".
