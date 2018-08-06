@@ -11,4 +11,4 @@ docker tag <image-id> onnx/onnx-docker:<branch-name>
 docker push onnx/onnx-docker:<branch-name>
 
 ## Pull the images
-docker pull onnx/onnx-docker:<branch-name>
+docker pull amirhosein/onnx-docker:<branch-name>
