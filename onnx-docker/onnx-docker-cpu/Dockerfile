@@ -41,4 +41,3 @@ RUN cd /root/programs/pytorch; pip install -r "requirements.txt"; \
     NO_CUDA=0 python setup.py build develop
 
 WORKDIR /root/programs
-</pre></body></html>
