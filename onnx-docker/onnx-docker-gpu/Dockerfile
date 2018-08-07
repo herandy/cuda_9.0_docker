@@ -38,6 +38,11 @@ RUN git clone --recursive https://github.com/onnx/onnx.git /root/programs/onnx
 RUN git clone --recursive https://github.com/pytorch/pytorch.git /root/programs/pytorch
 RUN cd /root/programs/onnx; python setup.py develop
 
-RUN cd /root/programs/pytorch; mkdir build && cd build; cmake ..; make install
+RUN cd /root/programs/pycharm; ./scripts/build_anaconda.sh --install-locally --cuda 9.0 --cudnn 7
+
+ENV CMAKE_PREFIX_PATH="$(dirname $(which conda))/../"
+conda install -y numpy pyyaml mkl mkl-include setuptools cmake cffi typing
+conda install -c mingfeima -y mkldnn
+RUN cd /root/programs/pycharm; python setup.py install
 
 WORKDIR /root/programs
