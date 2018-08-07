@@ -34,10 +34,10 @@ RUN pip3 install wheel ipython==5.0 numpy scipy pyyaml scipy scikit-learn numpy
 RUN mkdir -p /root/programs
 RUN git clone --recursive https://github.com/onnx/onnx.git /root/programs/onnx
 RUN git clone --recursive https://github.com/pytorch/pytorch.git /root/programs/pytorch
-RUN cd /root/programs/onnx; python setup.py develop
-RUN cd /root/programs/pytorch; pip install -r "caffe2/requirements.txt"; \
-    CMAKE_ARGS="-DCAFFE2_LINK_LOCAL_PROTOBUF=OFF -DBUILD_CUSTOM_PROTOBUF=OFF" python setup_caffe2.py develop
-RUN cd /root/programs/pytorch; pip install -r "requirements.txt"; \
+RUN cd /root/programs/onnx; python3 setup.py develop
+RUN cd /root/programs/pytorch; pip3 install -r "caffe2/requirements.txt"; \
+    CMAKE_ARGS="-DCAFFE2_LINK_LOCAL_PROTOBUF=OFF -DBUILD_CUSTOM_PROTOBUF=OFF" python3 setup_caffe2.py develop
+RUN cd /root/programs/pytorch; pip3 install -r "requirements.txt"; \
     NO_CUDA=0 python setup.py build develop
 
 WORKDIR /root/programs
