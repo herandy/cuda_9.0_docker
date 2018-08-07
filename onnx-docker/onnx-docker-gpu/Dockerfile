@@ -5,12 +5,14 @@
 
 FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 
-RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
-
-RUN apt-get update && apt-get install -y software-properties-common
-
-RUN add-apt-repository ppa:deadsnakes/ppa
-
+# download conda
+RUN mkdir -p /root/programs
+RUN ["/bin/bash", "-c", "wget https://repo.continuum.io/archive/Anaconda3-latest-Linux-x86_64.sh -O /root/programs/anaconda.sh"]
+RUN chmod 0755 /root/programs/anaconda.sh
+RUN ["/bin/bash", "-c", "/root/programs/anaconda.sh -b -p /root/programs/anaconda3"]
+ENV PATH="/root/programs/anaconda3/bin:$PATH"
+RUN rm /root/programs/anaconda.sh
+    
 RUN apt-get update && apt-get install -y --no-install-recommends \
          build-essential \
          cmake \
@@ -26,33 +28,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	 libgflags-dev \
          libgoogle-glog-dev \
          liblmdb-dev \
-         libprotobuf-dev \
-         protobuf-compiler \
-         cmake \
-         python3.6 python3-pip python3-dev python3-setuptools && \
+         cmake && \
      rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install --upgrade pip
-RUN pip3 install wheel ipython==5.0 numpy scipy pyyaml scipy scikit-learn numpy
+RUN pip install --upgrade pip
+RUN pip install wheel ipython==5.0 numpy scipy pyyaml scipy scikit-learn numpy future levelldb protobuf pytdot python-gflags scikit-image six
 
-RUN mkdir -p /root/programs
 RUN git clone --recursive https://github.com/onnx/onnx.git /root/programs/onnx
 RUN git clone --recursive https://github.com/pytorch/pytorch.git /root/programs/pytorch
-RUN cd /root/programs/onnx; python3 setup.py install
-
-RUN pip3 install --user \
-    	 future \
-  	 leveldb \
-   	 numpy \
-   	 protobuf \
-  	 pydot \
-  	 python-gflags \
-    	 pyyaml \
-   	 scikit-image \
-   	 six
+RUN cd /root/programs/onnx; python setup.py develop
 
 RUN cd /root/programs/pytorch; mkdir build && cd build; cmake ..; make install
-RUN cd /root/programs/pytorch; pip install -r "requirements.txt"; \
-    NO_CUDA=0 python setup.py build develop
 
 WORKDIR /root/programs
