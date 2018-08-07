@@ -44,7 +44,7 @@ RUN conda install -c pytorch -y magma-cuda90
 RUN conda install -c conda-forge -y pybind11
 
 RUN cd /root/programs/onnx; python setup.py develop
-RUN cd /root/programs/pycharm; ./scripts/build_anaconda.sh --install-locally --cuda 9.0 --cudnn 7
-RUN cd /root/programs/pycharm; python setup.py install
+RUN cd /root/programs/pytorch; ./scripts/build_anaconda.sh --install-locally --cuda 9.0 --cudnn 7
+RUN cd /root/programs/pytorch; python setup.py install
 
 WORKDIR /root/programs
