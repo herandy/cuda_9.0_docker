@@ -52,5 +52,7 @@ RUN pip3 install --user \
    	 six
 
 RUN cd /root/programs/pytorch; mkdir build && cd build; cmake ..; make install
+RUN cd /root/programs/pytorch; pip install -r "requirements.txt"; \
+    NO_CUDA=0 python setup.py build develop
 
 WORKDIR /root/programs
