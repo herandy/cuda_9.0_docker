@@ -32,7 +32,7 @@ ENV PATH="/root/programs/anaconda3/bin:$PATH"
 RUN rm /root/programs/anaconda.sh
 
 RUN pip install --upgrade pip
-RUN pip install wheel ipython==5.0 numpy scipy pyyaml scipy scikit-learn numpy future protobuf pydot python-gflags scikit-image six
+RUN pip install wheel ipython==5.0 numpy scipy pyyaml scipy scikit-learn numpy future pydot python-gflags scikit-image six
 
 RUN git clone --recursive https://github.com/onnx/onnx.git /root/programs/onnx
 RUN git clone --recursive https://github.com/pytorch/pytorch.git /root/programs/pytorch
