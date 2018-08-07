@@ -34,7 +34,7 @@ RUN pip3 install wheel ipython==5.0 numpy scipy pyyaml scipy scikit-learn numpy
 RUN mkdir -p /root/programs
 RUN git clone --recursive https://github.com/onnx/onnx.git /root/programs/onnx
 RUN git clone --recursive https://github.com/pytorch/pytorch.git /root/programs/pytorch
-RUN cd /root/programs/onnx; python3 setup.py develop
+RUN cd /root/programs/onnx; python3 setup.py install
 
 RUN pip3 install --user \
     	 future \
