@@ -28,8 +28,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          python3 python3-pip python3-dev python3-setuptools && \
      rm -rf /var/lib/apt/lists/*
 
-RUN pip install --upgrade pip
-RUN pip install wheel ipython==5.0 numpy scipy pyyaml scipy scikit-learn numpy
+RUN pip3 install --upgrade pip
+RUN pip3 install wheel ipython==5.0 numpy scipy pyyaml scipy scikit-learn numpy
 
 RUN mkdir -p /root/programs
 RUN git clone --recursive https://github.com/onnx/onnx.git /root/programs/onnx
