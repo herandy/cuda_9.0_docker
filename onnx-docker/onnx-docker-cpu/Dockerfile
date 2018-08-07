@@ -34,6 +34,17 @@ RUN git clone --recursive https://github.com/onnx/onnx.git /root/programs/onnx
 RUN git clone --recursive https://github.com/pytorch/pytorch.git /root/programs/pytorch
 RUN cd /root/programs/onnx; python setup.py develop
 
+RUN pip  install --user \
+    	 future \
+  	 leveldb \
+   	 numpy \
+   	 protobuf \
+  	 pydot \
+  	 python-gflags \
+    	 pyyaml \
+   	 scikit-image \
+   	 six
+
 RUN cd /root/programs/pytorch; mkdir build && cd build; cmake ..; make install
 
 WORKDIR /root/programs
