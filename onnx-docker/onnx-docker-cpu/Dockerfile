@@ -27,23 +27,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
      rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip
-RUN pip install wheel ipython==5.0 numpy scipy pyyaml scipy scikit-learn numpy
+RUN pip install wheel ipython==5.0 numpy scipy pyyaml scipy scikit-learn numpy future levelldb protobuf pytdot python-gflags scikit-image six
 
 RUN mkdir -p /root/programs
 RUN git clone --recursive https://github.com/onnx/onnx.git /root/programs/onnx
 RUN git clone --recursive https://github.com/pytorch/pytorch.git /root/programs/pytorch
 RUN cd /root/programs/onnx; python setup.py develop
-
-RUN pip  install --user \
-    	 future \
-  	 leveldb \
-   	 numpy \
-   	 protobuf \
-  	 pydot \
-  	 python-gflags \
-    	 pyyaml \
-   	 scikit-image \
-   	 six
 
 RUN cd /root/programs/pytorch; mkdir build && cd build; cmake ..; make install
 
