@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          libprotobuf-dev \
          protobuf-compiler \
          cmake \
-         python python-pip python-dev python-setuptools &amp;&amp; \
+         python python-pip python-dev python-setuptools && \
      rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip
