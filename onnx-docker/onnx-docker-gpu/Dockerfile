@@ -36,13 +36,15 @@ RUN pip install wheel ipython==5.0 numpy scipy pyyaml scipy scikit-learn numpy f
 
 RUN git clone --recursive https://github.com/onnx/onnx.git /root/programs/onnx
 RUN git clone --recursive https://github.com/pytorch/pytorch.git /root/programs/pytorch
-RUN cd /root/programs/onnx; python setup.py develop
-
-RUN cd /root/programs/pycharm; ./scripts/build_anaconda.sh --install-locally --cuda 9.0 --cudnn 7
 
 ENV CMAKE_PREFIX_PATH="$(dirname $(which conda))/../"
-conda install -y numpy pyyaml mkl mkl-include setuptools cmake cffi typing
-conda install -c mingfeima -y mkldnn
+RUN conda install -y numpy pyyaml mkl mkl-include setuptools cmake cffi typing protobuf
+RUN conda install -c mingfeima -y mkldnn
+RUN conda install -c pytorch -y magma-cuda90
+RUN conda install -c conda-forge -y pybind11
+
+RUN cd /root/programs/onnx; python setup.py develop
+RUN cd /root/programs/pycharm; ./scripts/build_anaconda.sh --install-locally --cuda 9.0 --cudnn 7
 RUN cd /root/programs/pycharm; python setup.py install
 
 WORKDIR /root/programs
