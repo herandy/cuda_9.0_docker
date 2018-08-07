@@ -7,6 +7,7 @@ FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 
 # download conda
 RUN mkdir -p /root/programs
+RUN apt-get update && apt-get install -y wget
 RUN ["/bin/bash", "-c", "wget https://repo.continuum.io/archive/Anaconda3-5.2.0-Linux-x86_64.sh -O /root/programs/anaconda.sh"]
 RUN chmod 0755 /root/programs/anaconda.sh
 RUN ["/bin/bash", "-c", "/root/programs/anaconda.sh -b -p /root/programs/anaconda3"]
