@@ -28,6 +28,7 @@ RUN git clone --recursive https://github.com/onnx/onnx.git /opt/onnx
 RUN cd /opt/onnx; git submodule update --init --recursive;python setup.py install
 
 RUN pip install --upgrade pip
+RUN pip install sklearn_pandas
 
 # This must be done before pip so that requirements.txt is available
 RUN git clone --recursive https://github.com/pytorch/pytorch.git /opt/pytorch
