@@ -30,8 +30,8 @@ RUN pip install --upgrade pip
 
 # This must be done before pip so that requirements.txt is available
 RUN git clone --recursive https://github.com/pytorch/pytorch.git /opt/pytorch
-RUN git submodule update --init
 WORKDIR /opt/pytorch
+RUN git submodule update --init
 COPY . .
 
 RUN ./scripts/build_anaconda.sh --install-locally --cuda 9.0 --cudnn 7
