@@ -8,9 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          vim \
          ca-certificates \
          libjpeg-dev \
-         libpng-dev \
-	 protobuf-compiler \
-	 libprotoc-dev &&\
+         libpng-dev &&\
      rm -rf /var/lib/apt/lists/*
 
 
@@ -30,20 +28,7 @@ RUN cd /opt/onnx; git submodule update --init --recursive;python setup.py instal
 RUN pip install --upgrade pip
 RUN pip install sklearn_pandas
 
-# This must be done before pip so that requirements.txt is available
-RUN git clone --recursive https://github.com/pytorch/pytorch.git /opt/pytorch
-WORKDIR /opt/pytorch
-RUN git submodule update --init
-COPY . .
-
-RUN ./scripts/build_anaconda.sh --install-locally --cuda 9.0 --cudnn 7
-
-RUN git submodule update --init
-RUN TORCH_CUDA_ARCH_LIST="3.5 5.2 6.0 6.1 7.0+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
-    CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" \
-    pip install -v .
-
-RUN git clone https://github.com/pytorch/vision.git && cd vision && pip install -v .
+RUN conda install -c caffe2 -y pytorch-caffe2-cuda9.0-cudnn7
 
 RUN apt-get install -y openssh-server
 
