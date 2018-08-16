@@ -20,7 +20,7 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-la
      chmod +x ~/miniconda.sh && \
      ~/miniconda.sh -b -p /opt/conda && \
      rm ~/miniconda.sh && \
-     /opt/conda/bin/conda install -y python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl mkl-include cython typing conda-build scikit-learn pandas protobuf && \
+     /opt/conda/bin/conda install -y python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl mkl-include cython typing conda-build scikit-learn pandas protobuf opencv && \
      /opt/conda/bin/conda install -y -c conda-forge imbalanced-learn feather-format && \
      /opt/conda/bin/conda install -y -c pytorch magma-cuda90 && \
      /opt/conda/bin/conda clean -ya
@@ -35,6 +35,9 @@ RUN pip install sklearn_pandas
 RUN conda install -c caffe2 -y pytorch-caffe2-cuda9.0-cudnn7
 
 RUN apt-get update && apt-get install -y openssh-server
+
+RUN git clone --recursive https://github.com/leonardvandriel/caffe2_cpp_tutorial.git /opt/caffe2_cpp_tutorial
+RUN cd /opt/caffe2_cpp_tutorial; --proto_path=/opt/conda/include/caffe2 make
 
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
