@@ -34,7 +34,7 @@ RUN pip install sklearn_pandas
 
 RUN conda install -c caffe2 -y pytorch-caffe2-cuda9.0-cudnn7
 
-RUN apt-get install -y openssh-server
+RUN apt-get update && apt-get install -y openssh-server
 
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
