@@ -37,7 +37,7 @@ RUN conda install -c caffe2 -y pytorch-caffe2-cuda9.0-cudnn7
 RUN apt-get update && apt-get install -y openssh-server
 
 RUN git clone --recursive https://github.com/leonardvandriel/caffe2_cpp_tutorial.git /opt/caffe2_cpp_tutorial
-RUN cd /opt/caffe2_cpp_tutorial; --proto_path=/opt/conda/include/caffe2 make
+RUN cd /opt/caffe2_cpp_tutorial; make
 
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
